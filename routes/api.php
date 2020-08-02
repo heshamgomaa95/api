@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::group(['middleware'=>'api'],function (){
+Route::group(['middleware'=>['api','checkPassword']],function (){
    Route::post('get_main_categories','Api\CategoriesController@index');
+
 });

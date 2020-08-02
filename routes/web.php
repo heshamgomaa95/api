@@ -17,5 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('get_main_categories','Api\CategoriesController@index');
 
