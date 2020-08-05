@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\Api;
 
 use Closure;
 
-class CheckPassword
+class ChangeLanguage
 {
     /**
      * Handle an incoming request.
@@ -15,11 +15,11 @@ class CheckPassword
      */
     public function handle($request, Closure $next)
     {
+        app()->setLocale('ar');
 
-        if( $request->api_password != env('API_PASSWORD')) {
-            return response()->json(['message' => 'Unauthenticated.']);
+        if(isset($request->lang) && $request->lang=='en'){
+            app()->setLocale('en');
         }
-
         return $next($request);
     }
 }

@@ -16,7 +16,19 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::group(['middleware'=>['api','checkPassword']],function (){
-   Route::post('get_main_categories','Api\CategoriesController@index');
+Route::group(['middleware'=>['api','checkPassword','changeLanguage'],'namespace'=>'Api'],function (){
+   Route::post('get_main_categories','CategoriesController@index');
+   Route::post('get_categorie_byId','CategoriesController@getCategoryById');
+   Route::post('change_categroy_status','CategoriesController@changeStatus');
 
+   Route::group(['prefix'=>'admin','namespace'=>'Admin'],function (){
+       Route::post('login', 'AuthController@login');
+
+   });
+
+});
+
+Route::group(['middleware'=>['api','checkPassword','changeLanguage','checkadmintoken:admin-api'],'namespace'=>'Api'],function () {
+
+    Route::get('offers', 'CategoriesController@index');
 });
